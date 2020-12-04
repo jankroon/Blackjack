@@ -1,0 +1,1 @@
+# Player without any strategy
