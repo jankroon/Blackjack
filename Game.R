@@ -75,7 +75,7 @@ handleBank <- function() {
 
 playGame <- function(players) {
   # shuffle deck with the new created deck
-  deck <- shuffleDeck(createDeck())
+  deck <<- shuffleDeck(createDeck())
 
   # handle player 1
   result <<- data.frame(players = c(1), score = c(1))
