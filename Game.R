@@ -30,29 +30,47 @@ play.copycat <- function() {
   print(paste("Sum CopyCat handvalue: ", sum(copycat.hand$Value)))
 }
 
+selectWinner <- function() {
+  
+  if(resultBank$Value == 21) {
+    return("Bank won")
+  } else if(resultBank$Value > 21) {
+    return(result[(which(result$score <= 21)),])
+  } else {
+    winner1 <- result[(which(result$score == 21)),]
+    winner2 <- result[(which(result$score > resultBank$Value) & (result$score < 21)),]
+    result[(which(result$score == 21 || (result$score > resultBank$Value) & (result$score < 21))),]
+    
+    # return niets --> return if playerscore is 21 en if playerscore groter is dan bank maar kleiner is of gelijk aan 21
+    # result[(which(result$score == 21 || (result$score > resultBank$Value) & (result$score < 21))),]
+    winner <- rbind(winner2, winner1)
+    return(winner)
+  }
+}
+
 # bank
 handleBank <- function() {
-  player.hand <<- createHand() 
+  bank.hand <<- createHand() 
 
   repeat {
     card <- dealCard(deck)
 
     if (card$Face == "Ace") {
-      if(sum(player.hand$Value) <= 10) {
+      if(sum(bank.hand$Value) <= 10) {
         card$Value[card$Face == "Ace"] <- 11
       } else {
         card$Value[card$Face == "Ace"] <- 1
       }
     } else {
-      player.hand <<- rbind(player.hand, dealCard(deck))
+      bank.hand <<- rbind(bank.hand, dealCard(deck))
     }
 
-    if (sum(player.hand$Value) > 17) {
+    if (sum(bank.hand$Value) > 17) {
       break;
     }
   }
 
-  resultBank <<- data.frame("name" = "Bank", "Value" = sum(player.hand$Value))
+  resultBank <<- data.frame("name" = "Bank", "Value" = sum(bank.hand$Value))
 }
 
 playGame <- function(players) {
@@ -73,10 +91,10 @@ playGame <- function(players) {
     }
   }
 
-  #handleBank()
+  handleBank()
 
-  #winners <- selectWinner()
-  #print(winners)
+  winners <- selectWinner()
+  print(winners)
 }
 
 playGame(players= c("CopyCat", "RandomRat"))

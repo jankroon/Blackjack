@@ -36,8 +36,7 @@ randomrat.play <- function() {
     } else {
       ## originele bet moet je dan hebben voor de split
     }
-
-    return(print(paste("RandomRat bets: ", randomrat.bet(RandomRat.bankroll))))
   }
+  result <<- rbind(result, c("CopyCat", sum(copycat.hand$Value)))
 }
 

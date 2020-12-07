@@ -24,4 +24,6 @@ copycat.turn <- function(copycat.hand) {
   if (sum(copycat.hand$Value) > 17) {
     break;
   }
+
+  result <<- rbind(result, c("CopyCat", sum(copycat.hand$Value)))
 }
