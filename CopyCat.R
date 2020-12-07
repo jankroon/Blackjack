@@ -13,10 +13,7 @@ copycat.turn <- function(copycat.hand) {
       card$Value[card$Face == "Ace"] <- 11
     } else {
       card$Value[card$Face == "Ace"] <- 1
-    }
-  } else {
-    # dis lelijk
-    print("")
+    }    
   }
 
   copycat.hand <<- rbind(copycat.hand, dealCard(deck))
