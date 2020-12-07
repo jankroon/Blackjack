@@ -1,6 +1,6 @@
 # Blackjack
 Project of Students and Teachers of Hogeschool Rotterdam to investigate Blackjack strategies using R!
 
-# thanks voor de uitleg2
+"It is easy to shoot your foot off with git, but also easy to revert to a previous foot and merge it with your current leg."
 
-# tot de volgende keer ! 
+—Jack William Bell
