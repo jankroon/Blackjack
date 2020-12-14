@@ -31,24 +31,19 @@ play.copycat <- function() {
 }
 
 selectWinner <- function() {
-  
-  if(resultBank$Value == 21) {
-    return("Bank won")
-  } else if(resultBank$Value > 21) {
+  if(resultBank$score == 21) {
+    winners <- rbind(winners, c(players = "Bank", score = resultBank$score))
+  } else if(resultBank$score > 21) {
     return(result[(which(result$score <= 21)),])
   } else {
     winner1 <- result[(which(result$score == 21)),]
     winner2 <- result[(which(result$score > resultBank$Value) & (result$score < 21)),]
-    result[(which(result$score == 21 || (result$score > resultBank$Value) & (result$score < 21))),]
-    
-    # return niets --> return if playerscore is 21 en if playerscore groter is dan bank maar kleiner is of gelijk aan 21
-    # result[(which(result$score == 21 || (result$score > resultBank$Value) & (result$score < 21))),]
+
     winner <- rbind(winner2, winner1)
     return(winner)
   }
 }
 
-# bank
 handleBank <- function() {
   bank.hand <<- createHand() 
 
@@ -75,11 +70,10 @@ handleBank <- function() {
 
 playGame <- function(players) {
   # shuffle deck with the new created deck
-  deck <- shuffleDeck(createDeck())
+  deck <- createDeck()
+  deck <- shuffleDeck(deck)
 
-  # handle player 1
-  result <<- data.frame(players = c(1), score = c(1))
-  colnames(result) <- c("PlayerName", "Value")
+  result <<- data.frame(players = character(), score = integer())
 
   for(player in players) {
     if(player == "CopyCat") {
@@ -92,6 +86,10 @@ playGame <- function(players) {
   }
 
   handleBank()
+
+  winners <- data.frame(PlayerType=character(),
+             Score=integer(),
+             stringsAsFactors=FALSE)
 
   winners <- selectWinner()
   print(winners)
