@@ -1,1 +1,11 @@
 Software Ontwerp
+-------------------
+idee:
+Robot spelers (RandomRat en CopyCat)
+Interactie met mensen (kiest welke opties)
+master dataframe met alle informatie van een speler
+
+Dealer beschermt de spelregels
+2 spelrondes : 
+  1. de dealer
+  2. de speler
