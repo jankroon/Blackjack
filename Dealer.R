@@ -18,7 +18,7 @@ createDeck <- function() {
 shuffleDeck <- function(deck) {
   random.order <- sample(1:nrow(deck), size = nrow(deck))
   deck <- deck[random.order, ]
-
+  print("SHUFFLED")
   return(deck)
 }
 
