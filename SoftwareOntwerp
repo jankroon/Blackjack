@@ -1,11 +1,140 @@
 Software Ontwerp
 -------------------
+
+Versiebeheer
+------------
+
+14-12-20 John: eerste aanzet
+
 idee:
 Robot spelers (RandomRat en CopyCat)
 Interactie met mensen (kiest welke opties)
-master dataframe met alle informatie van een speler
-
+Dataframes met alle informatie
 Dealer beschermt de spelregels
-2 spelrondes : 
-  1. de dealer
-  2. de speler
+
+Termen: https://extra.betamerica.com/blackjack-terms-explained-blackjack-glossary-and-terminology/
+
+  
+1. Constanten
+STAND=1
+HIT=2
+DOUBLE=3
+SPLIT=4
+BUST=5
+
+PHYSICAL = 10
+VIRTUAL=11
+
+SEVENTEEN=17
+TWENTYONE=21
+
+2. Tabellen
+
+PLAYER
+- name
+- bankroll
+- virtual/physical
+
+HAND
+- list of cards
+- player
+- bet
+
+
+3. Variabelen en functies (CamelCase)
+
+use clear names
+
+numberOfPlayers
+numberOfBots
+numberOfRounds
+startBankroll
+maxBet
+virtualPlayers (boolean)
+deckSize (1-6)
+cardSet
+...
+
+shuffle()
+deal()
+...
+
+
+4. programmastructuur
+
+#1 initialisation
+
+ask for number of players
+ask for number of rounds
+ask if there are virtual players
+ask for decksize
+
+LOOP
+ask for names of players
+
+#2 generate cards and tables 
+
+PLAYER : name, startBankroll, PHYSICAL (numberOfPlayers rows)
+IF virtualPlayers ADD name, startBankroll, VIRTUAL (numberOfBots rows)
+
+generate cardSet
+generate deck (deckSize x 52 cards)
+shuffle deck
+pointer = 1 don't change deck, only pointer in deck
+
+#3 game loop
+
+REPEAT numberOfRounds x
+
+  #3a betting and dealing
+  
+  FOR every player
+    ask for bet (ADD to HANDS)
+    deal 2 cards (ADD to HANDS)
+    show cards
+    IF 21 then payout 1.5 x bet
+  
+  deal 2 cards for bank and ADD to HANDS
+  show only ONE card
+  
+  #3b splitting and doubling
+  
+  FOR every player
+    ask for split
+    ask for double
+    
+  #3c hitting
+  
+  FOR every hand
+  
+  
+  
+  
+  #3dbank hitting
+  
+  
+  
+  
+  #3d pay out
+  
+
+    
+5. ask player
+
+Bank weet niet of player virtueel is. 
+Er komt een soort playerAction functie die nagaat of player virtueel is.
+Zo nee dan wordt er userinput gevraagd
+Zo ja dan wordt er userinput gegenereerd
+    
+  
+  
+  
+
+
+
+
+
+
+
+
+
