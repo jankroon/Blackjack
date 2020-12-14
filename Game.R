@@ -1,4 +1,5 @@
 # Game loop for multiple Blackjack player and the bank
+# Not 100% error free :-(
 
 source("RandomRat.R")
 source("CopyCat.R")
@@ -15,6 +16,10 @@ play.randomRat <- function() {
 
   print(paste("RandomRat bankroll: ", randomrat.bet(RandomRat.bankroll)))
   print(paste("Sum randomRat handvalue: ", sum(randomrat.hand$Value)))
+  
+  # ADD result to resultlist
+  result = rbind(result,list("RandomRat",sum(randomrat.hand$Value)))
+  
 }
 
 # test Copycat
@@ -28,6 +33,9 @@ play.copycat <- function() {
   
   print(paste("Copycat bets: ", copycat.bet(Copycat.bankroll, Copycat.bet)))
   print(paste("Sum CopyCat handvalue: ", sum(copycat.hand$Value)))
+  
+  # ADD result to resultlist
+  result = rbind(result,list("CopyCat",sum(copycat.hand$Value)))
 }
 
 selectWinner <- function() {
@@ -75,11 +83,16 @@ handleBank <- function() {
 
 playGame <- function(players) {
   # shuffle deck with the new created deck
-  deck <- shuffleDeck(createDeck())
+  # ISSUE: deck is not shuffled !!!
+  deck <- createDeck()
+  deck <- shuffleDeck(deck)
 
   # handle player 1
-  result <<- data.frame(players = c(1), score = c(1))
+  result <<- data.frame(players, score = c(0))
   colnames(result) <- c("PlayerName", "Value")
+  # ISSUE: first row is 1  1 changed in playername 0
+  
+  
 
   for(player in players) {
     if(player == "CopyCat") {
@@ -92,9 +105,12 @@ playGame <- function(players) {
   }
 
   handleBank()
+  
+  print("Bank:")
+  print(resultBank)
 
   winners <- selectWinner()
   print(winners)
 }
 
-playGame(players= c("CopyCat", "RandomRat"))
+playGame(players= c("CopyCat","RandomRat"))
