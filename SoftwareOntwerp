@@ -5,22 +5,32 @@ Versiebeheer
 ------------
 
 14-12-20 John: eerste aanzet
+17-12-20 John: voorstel software ontwerp voltooid
 
-idee:
+
+uitgangspunten:
 Robot spelers (RandomRat en CopyCat)
-Interactie met mensen (kiest welke opties)
-Dataframes met alle informatie
+Interactie met mensen (dealer kiest welke opties)
+Dataframes met alle informatie, geen OO-aanpak
 Dealer beschermt de spelregels
 
-Termen: https://extra.betamerica.com/blackjack-terms-explained-blackjack-glossary-and-terminology/
 
+
+0. opsplitsen R-files
+
+functions.R (zo blijf main leesbaarder en meer taakverdeling mogelijk)
+of: R-file per functie?
+bots.R (de robotspelers)
+main.R
+testdeck.R (niet random, spel heeft voorspelbaar verloop)
+  
   
 1. Constanten
-STAND=1
+STAND=1 of PASS?
 HIT=2
 DOUBLE=3
 SPLIT=4
-BUST=5
+BUST=5 of LOST?
 
 PHYSICAL = 10
 VIRTUAL=11
@@ -44,6 +54,7 @@ HAND
 3. Variabelen en functies (CamelCase)
 
 use clear names
+can be extended
 
 numberOfPlayers
 numberOfBots
@@ -57,6 +68,8 @@ cardSet
 
 shuffle()
 deal()
+askPlayer()
+handValue()
 ...
 
 
@@ -105,26 +118,48 @@ REPEAT numberOfRounds x
     
   #3c hitting
   
-  FOR every hand
-  
-  
-  
+  FOR every (active) hand
+    establish possible actions
+    askPlayer
+    establish new hand
+    REPEAT if hand stll active (no pass or bust)
+
   
   #3dbank hitting
-  
-  
+    
+  show second card
+  buy cards until bust or 17 or more is reached
   
   
   #3d pay out
+  calculate bankvalue
+  FOR all living hands
+    calculate handvalue
+    compare results and payout or take bet
+    
+  #3e show status after this round
+  player, bankroll
   
 
     
 5. ask player
 
 Bank weet niet of player virtueel is. 
-Er komt een soort playerAction functie die nagaat of player virtueel is.
-Zo nee dan wordt er userinput gevraagd
+Er komt een soort playerAction functie die eerst nagaat of player virtueel is.
+Zo nee dan wordt er userinput met keyboard gevraagd
 Zo ja dan wordt er userinput gegenereerd
+
+6. ontwikkelvolgorde
+
+eerst basisfuncties en basisspel
+test
+split en double
+test
+virtuele spelers
+test
+
+7. hergebruik code
+niet helemaal opnieuw, er is al veel bruikbaar materiaal
     
   
   
