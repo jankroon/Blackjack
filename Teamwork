@@ -3,7 +3,15 @@ Teamwork
 14 december:
   John begint donderdag 17 december
     Gaat beginnen met de set up van het project.
+  
   Akram neemt over vrijdag 18 december
+    status update:
+    op basis van software ontwerp code gemaakt tot stap 3.
+    - ik heb 2 documenten toegevoegd. Main & functions
+    - ik ben deels afgeweken van het ontwerp, ten behoefe van efficientie
+    - het is nu één grote functie, waardoor de speler maar één functie hoeft te gebruiken. Verder worden alleen de spelgegevens ingevoerd. 
+    - Ik ben tot het punt gekomen dat de eerste ronde is geweest. vanaf hier kunnen speler kiezen wat ze doen. (bijv hit, pass etc.)
+    
 
 
 Als je klaar bent, geef status update in dit bestand.
