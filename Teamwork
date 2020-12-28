@@ -11,6 +11,12 @@ Teamwork
     - ik ben deels afgeweken van het ontwerp, ten behoeve van efficiëntie
     - het is nu één grote functie, waardoor de speler maar één functie hoeft te gebruiken. Verder worden alleen de spelgegevens ingevoerd. 
     - Ik ben tot het punt gekomen dat de eerste ronde is geweest. vanaf hier kunnen speler kiezen wat ze doen. (bijv hit, pass etc.)
+    Update 2:
+    - De code werkt, maar er moeten nog dingen toegevoegd worden:
+      1. Meer moves (nu alleen hit or pass)
+      2. beide kaarten van de bank zijn zichtbaar (ipv 1 open en andere dicht)
+      3. strategiën van bots zijn nu hetzelfde (alleen onder de 17 hitten)
+      4. players met een lege bankroll moeten verwijderd of buitenspel gezet worden
     
 
 
