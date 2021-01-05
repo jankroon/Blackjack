@@ -216,7 +216,7 @@ Blackjack <- function(){
   # create cards
   make_cards <- function(){
     face <- c("Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2")
-    suit <- c("spades", "clubs", "diamonds", "hearts")
+    suit <- c("\U2660", "\U2663", "\U2666", "\U2665")
     value <- c(11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2)
     
     freshdeck <- data.frame(face= rep(face, times = 4 * number_of_decks ), 
