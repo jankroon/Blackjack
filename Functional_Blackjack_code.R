@@ -146,30 +146,35 @@ Blackjack <- function(){
               move <<- append(move, "pass")
             }
           }
-          
+
           strategy_copycat <- function() {
-            if (HANDS$score[HANDS$player=="copycat"] < 17) {
-              move <<- append(move, "hit")
-            } else if (HANDS$score[HANDS$player=="copycat"] > 21) { 
-              move <<- append(move, NULL)
-            } else {
-              move <<- append(move, "pass")
-            }
+              if (HANDS$score[HANDS$player == "copycat"] < 17) {
+                move <<- append(move, "hit")
+              } else if (HANDS$score[HANDS$player == "copycat"] > 21) { 
+                move <<- append(move, NULL)
+              } else {
+                move <<- append(move, "pass")
+              }
           }
-          
+
           strategy_randomrat <- function() {
-            if (HANDS$score[HANDS$player=="randomrat"] < 17) {
-              move <<- append(move, "hit")
-            } else if (HANDS$score[HANDS$player=="randomrat"] > 21) { 
-              move <<- append(move, NULL)
-            } else {
-              move <<- append(move, "pass")
-            }
+              if (HANDS$score[HANDS$player == "randomrat"] < 17) {
+                move <<- append(move, "hit")
+              } else if (HANDS$score[HANDS$player == "randomrat"] > 21) {
+                move <<- append(move, NULL)
+              } else {
+                move <<- append(move, "pass")
+              }
           }
-          
+
           strategy_bank()
-          strategy_copycat()
-          strategy_randomrat()
+          if("copycat" %in% HANDS$player) {
+            strategy_copycat()
+          }
+
+          if("randomrat" %in% HANDS$player) {
+            strategy_randomrat()
+          }
       
           if (is.null(move)){
             print("Bots are out")  
