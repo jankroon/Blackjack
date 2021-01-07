@@ -1,105 +1,44 @@
+source("userInputFunctions.R")
+
 Blackjack <- function(){
   
 # game config
   game_config <- function(){
     # set starting bankroll
-    repeat {
-      starting_bankroll <- as.numeric(readline("Insert starting bankroll  "))
-      
-      if (is.na(starting_bankroll)) {
-          print("Choose a numeric value")
-      } else if (!is.wholenumber(starting_bankroll)) {
-          print("Bankroll must be an integer value")
-      } else if ( starting_bankroll <= 10) {
-          print("Bankroll must be higer than 10")
-      } else {
-          break
-      }
-    }
-  
-  #!  set bank?
-    PLAYER <<- data.frame(player=c("Bank"), bankroll= as.numeric(Inf), virtual_or_physical = 11)
-      
+    starting_bankroll <<- askForInt("Insert starting bankroll", 10, Inf)
+
     # set number of players
-    repeat {
-      number_of_player <- as.numeric(readline("Insert number of physical players   "))
-      if (is.na(number_of_player)) {
-        print("Choose a numeric value")
-      } else if (!is.wholenumber(number_of_player)) {
-        print("Number of players must be an integer value")
-      } else if (number_of_player < 1) {
-        print("Minimum of 1 player is required")
-      } else if (number_of_player > 8) {
-        print("Maximum of 8 players is allowed")
-      } else {
-        break
-      }
-    }
-  
+    number_of_player <<- askForInt("Insert number of physical players", 1, 8)
+
+    #!  set bank?
+    PLAYER <<- data.frame(player=c("Bank"), bankroll= as.numeric(Inf), virtual_or_physical = 11)
+
     # set players name
     for (i in 1:number_of_player) {
-      PLAYER[i+1,1] <<- readline("Insert your name  ")
+      PLAYER[i+1,1] <<- readline("Insert a name : ")
       PLAYER[i+1,2] <<- starting_bankroll
       PLAYER[i+1,3] <<- 10 
     }
-      
-    repeat {
-      enable_bots <- tolower(readline("Enable bots? yes/no  "))
-      
-      if (enable_bots == "yes") {
-        PLAYER <<- rbind(PLAYER, data.frame(player=c("copycat", "randomrat"), bankroll=starting_bankroll, virtual_or_physical=11))
-        break
-      } else if (enable_bots == "no") { 
-        break
-      } else { 
-        print("Choose between yes or no") 
-      }
-    }
-    
+
+    #enable bots
+    enable_bots <<- askForYN("Enable bots")
+
     # set number of decks
-    repeat {
-      number_of_decks <<- as.numeric(readline("Insert number of decks  "))
-      if (is.na(number_of_decks)) {
-          print("Choose a numeric value")
-      } else if ( number_of_decks > 10) {
-          print("Maximum of 10 decks is allowed")
-      } else if ( number_of_decks < 1) {
-          print("Minimum of 1 deck is required")
-      } else if (!is.wholenumber(number_of_decks)) {
-          print("Deck must be an integer value")
-      } else {
-           break
-      }
-    }
-      
+    number_of_decks <<- askForInt("Insert number of decks", 1, 10)
+
     # confirming setting  
-    repeat {
-    confirm_player_choice <- tolower(readline("Do you want to continue with these settings?.. yes/no  "))
-    
-      if (confirm_player_choice == "yes") {
-          print("lets play !")
-          break
-      } else if ( confirm_player_choice == "no") {
-          print("Change your settings")
-        game_config()
-        break
-      } else {
-          print("Choose between yes or no...")
-      } 
-    }
-    
+    confirm_player_choice <<- askForYN("Do you want to continue with these settings")
   }
-  
 
   # create new game
   new_game <- function(){
-    
+
     minimum_bet <- as.numeric(readline("Insert minimum bet   "))
     HANDS <<- data.frame("cards"= rep("nothing", times = 1 * nrow(PLAYER)), 
                          player= PLAYER$player, 
                          bet= c(as.numeric(Inf), rep(0, times = 1 * (nrow(PLAYER)-1))),
                          score= rep(0, times = 1 * nrow(PLAYER)))
-    
+
     for (i in 2:nrow(HANDS)){
       repeat {
         repeat{
