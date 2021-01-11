@@ -24,4 +24,19 @@ er zijn maar 2 bestanden:
 - Example_input_for21 (hierin wordt de code aangeroepen en kan de code gecontroleerd worden)
 - functional_blackjack_code (hierin staan de codes om het spel te laten werken)
 
+11 januari Irene:
+  dit heb ik gedaan:
+  - userInputFunctions geimplementeerd
+  - risbot en cowardbot toegevoegd als strategie en als speler
+  - suits aangepast naar symbolen
+  - identation fixen
+  - error bij no op bots settings fixen
+  
+  dit moet nog gedaan worden:
+  - In andere files zetten (NTH)
+  - strategie randomrat moet worden gemaakt - akram (must)
+  - de winners moeten uitbetaald worden als ze gewonnen hebben. - akram(must)
+  - bank gaat pas aan het eind kopen nadat alle spellen gespeeld zijn met de players - akram (must)
+  - mooi printen van de handen (code in losse file) - John (must)
+
 Als je klaar bent, geef status update in dit bestand.

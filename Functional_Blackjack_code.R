@@ -49,7 +49,7 @@ Blackjack <- function(){
       repeat {
         repeat{
           if(HANDS$virtual[i] == TRUE) {
-            HANDS$bet[i] <<- runif(1, minimum_bet, (minimum_bet + 1000))
+            HANDS$bet[i] <<- runif(1, minimum_bet, (minimum_bet * 100))
           } else {
             HANDS$bet[i] <<- as.numeric(readline(paste("Place your bet,", HANDS$player[i], " " ) ))
           }
@@ -86,8 +86,8 @@ Blackjack <- function(){
     repeat {
       print(HANDS)
       complete_data <<- merge(HANDS, PLAYER, sort = FALSE)
-      players_alive <- complete_data$player[complete_data$virtual_or_physical==10 & complete_data$score<=21]
-      bots_alive <- complete_data$player[complete_data$virtual_or_physical==11 & complete_data$score<=21]
+      players_alive <- complete_data$player[complete_data$virtual == FALSE & complete_data$score <= 21]
+      bots_alive <<- complete_data$player[complete_data$virtual == TRUE & complete_data$score <= 21]
       move <- NULL
       
       if (length(bots_alive) >= 1) {
@@ -152,11 +152,11 @@ Blackjack <- function(){
           }
           
           if("cowardbot" %in% HANDS$player) {
-            strategy_randomrat()
+            strategy_cowardbot()
           }
           
           if("riskbot" %in% HANDS$player) {
-            strategy_randomrat()
+            strategy_riskbot()
           }
       
           if (is.null(move)){
