@@ -11,17 +11,22 @@ Blackjack <- function(){
     number_of_player <<- askForInt("Insert number of physical players", 1, 8)
 
     #!  set bank?
-    PLAYER <<- data.frame(player=c("Bank"), bankroll= as.numeric(Inf), virtual_or_physical = 11)
+    PLAYER <<- data.frame(player=c("Bank"), bankroll= as.numeric(Inf), virtual = TRUE)
 
     # set players name
     for (i in 1:number_of_player) {
       PLAYER[i+1,1] <<- readline("Insert a name : ")
       PLAYER[i+1,2] <<- starting_bankroll
-      PLAYER[i+1,3] <<- 10 
+      PLAYER[i+1,3] <<- FALSE
     }
 
     #enable bots
     enable_bots <<- askForYN("Enable bots")
+    if(enable_bots) {
+      PLAYER <<- rbind(PLAYER, data.frame(player=c("copycat", "randomrat", "riskbot", "cowardbot"), bankroll=starting_bankroll, virtual=TRUE ))
+    } else {
+      NULL
+    }
 
     # set number of decks
     number_of_decks <<- askForInt("Insert number of decks", 1, 10)
@@ -37,15 +42,26 @@ Blackjack <- function(){
     HANDS <<- data.frame("cards"= rep("nothing", times = 1 * nrow(PLAYER)), 
                          player= PLAYER$player, 
                          bet= c(as.numeric(Inf), rep(0, times = 1 * (nrow(PLAYER)-1))),
-                         score= rep(0, times = 1 * nrow(PLAYER)))
+                         score= rep(0, times = 1 * nrow(PLAYER)),
+                         virtual=PLAYER$virtual)
 
     for (i in 2:nrow(HANDS)){
       repeat {
         repeat{
-        HANDS$bet[i] <<- as.numeric(readline(paste("Place your bet,", HANDS$player[i], " " ) ))
-        if (!is.na(HANDS$bet[i]) ){ break} }
-        if (HANDS$bet[i]>= minimum_bet)
-        {break} }
+          if(HANDS$virtual[i] == TRUE) {
+            HANDS$bet[i] <<- runif(1, minimum_bet, (minimum_bet + 1000))
+          } else {
+            HANDS$bet[i] <<- as.numeric(readline(paste("Place your bet,", HANDS$player[i], " " ) ))
+          }
+          
+        if (!is.na(HANDS$bet[i])) {break} 
+          
+        }
+        
+        if (HANDS$bet[i]>= minimum_bet) {break} 
+        
+      }
+      
       PLAYER$bankroll[i] <<- PLAYER$bankroll[i] - HANDS$bet[i]
     }
         
@@ -95,6 +111,26 @@ Blackjack <- function(){
                 move <<- append(move, "pass")
               }
           }
+          
+          strategy_cowardbot <- function() {
+            if (HANDS$score[HANDS$player == "cowardbot"] < 14) {
+              move <<- append(move, "hit")
+            } else if (HANDS$score[HANDS$player == "cowardbot"] > 21) { 
+              move <<- append(move, NULL)
+            } else {
+              move <<- append(move, "pass")
+            }
+          }
+          
+          strategy_riskbot <- function() {
+            if (HANDS$score[HANDS$player == "riskbot"] < 19) {
+              move <<- append(move, "hit")
+            } else if (HANDS$score[HANDS$player == "riskbot"] > 21) { 
+              move <<- append(move, NULL)
+            } else {
+              move <<- append(move, "pass")
+            }
+          }
 
           strategy_randomrat <- function() {
               if (HANDS$score[HANDS$player == "randomrat"] < 17) {
@@ -112,6 +148,14 @@ Blackjack <- function(){
           }
 
           if("randomrat" %in% HANDS$player) {
+            strategy_randomrat()
+          }
+          
+          if("cowardbot" %in% HANDS$player) {
+            strategy_randomrat()
+          }
+          
+          if("riskbot" %in% HANDS$player) {
             strategy_randomrat()
           }
       
