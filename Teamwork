@@ -7,11 +7,36 @@ Teamwork
   Akram neemt over vrijdag 18 december
     status update:
     op basis van software ontwerp code gemaakt tot stap 3.
-    - ik heb 2 documenten toegevoegd. Main & functions
+    - ik heb 2 documenten toegevoegd. Example_input_for21** & functional_blackjack_code**  (er stond perongeluk nog "functions" & "main", maar deze zijn een oude versie)
     - ik ben deels afgeweken van het ontwerp, ten behoeve van efficiëntie
     - het is nu één grote functie, waardoor de speler maar één functie hoeft te gebruiken. Verder worden alleen de spelgegevens ingevoerd. 
     - Ik ben tot het punt gekomen dat de eerste ronde is geweest. vanaf hier kunnen speler kiezen wat ze doen. (bijv hit, pass etc.)
+    Update 2:
+    - De code werkt, maar er moeten nog dingen toegevoegd worden:
+      1. Meer moves (nu alleen hit or pass)
+      2. beide kaarten van de bank zijn zichtbaar (ipv 1 open en andere dicht)
+      3. strategiën van bots zijn nu hetzelfde (alleen onder de 17 hitten)
+      4. players met een lege bankroll moeten verwijderd of buitenspel gezet worden
     
+    
+Samengevat: 
+er zijn maar 2 bestanden:
+- Example_input_for21 (hierin wordt de code aangeroepen en kan de code gecontroleerd worden)
+- functional_blackjack_code (hierin staan de codes om het spel te laten werken)
 
+11 januari Irene:
+  dit heb ik gedaan:
+  - userInputFunctions geimplementeerd
+  - risbot en cowardbot toegevoegd als strategie en als speler
+  - suits aangepast naar symbolen
+  - identation fixen
+  - error bij no op bots settings fixen
+  
+  dit moet nog gedaan worden:
+  - In andere files zetten (NTH)
+  - strategie randomrat moet worden gemaakt - akram (must)
+  - de winners moeten uitbetaald worden als ze gewonnen hebben. - akram(must)
+  - bank gaat pas aan het eind kopen nadat alle spellen gespeeld zijn met de players - akram (must)
+  - mooi printen van de handen (code in losse file) - John (must)
 
 Als je klaar bent, geef status update in dit bestand.
