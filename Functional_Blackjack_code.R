@@ -133,13 +133,13 @@ Blackjack <- function(){
           }
 
           strategy_randomrat <- function() {
-              if (HANDS$score[HANDS$player == "randomrat"] < 17) {
-                move <<- append(move, "hit")
-              } else if (HANDS$score[HANDS$player == "randomrat"] > 21) {
-                move <<- append(move, NULL)
-              } else {
-                move <<- append(move, "pass")
-              }
+            if (HANDS$score[HANDS$player == "randomrat"] < 21) {
+              move <<- append(move, sample(c("hit", "pass"), 1))
+            } else if (HANDS$score[HANDS$player == "randomrat"] > 21) {
+              move <<- append(move, NULL)
+            } else if (HANDS$score[HANDS$player == "randomrat"] == 21) {
+              move <<- append(move, "pass")
+            }
           }
 
           strategy_bank()
@@ -227,8 +227,21 @@ Blackjack <- function(){
   }
 
   # check for winners
+  # check for winners
   check_for_winner <- function() {
-    winner <- HANDS$player[HANDS$score==(max(HANDS$score[HANDS$score<=21]))]
+    
+    if ( HANDS$player=="Bank" && HANDS$score==21){
+      winner <- "Bank"
+    } else if (HANDS$player=="Bank" && HANDS$score > 21){
+      winner <- HANDS$player[HANDS$score <= 21]
+    } else if (21 %in% HANDS$score){
+      winner <- HANDS$player[HANDS$score==21]
+    } else {
+      winner <- HANDS$player[HANDS$score > HANDS$score[HANDS$player=="Bank"] & HANDS$score <= 21 ]
+      if (length(winner) < 1){
+        winner <- "Bank"
+      }
+    }
     
     if (length(winner)>=1){
       print(paste("Congratulations, The winner is ", winner ,"!"))
@@ -298,7 +311,6 @@ Blackjack <- function(){
   
 ##### things to do
   # to do, add more moves
-  # to do, add different automated strategies for bots 
   # to do, what to do with person with to low bankroll ? 
 }
 

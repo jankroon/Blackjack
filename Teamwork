@@ -38,5 +38,14 @@ er zijn maar 2 bestanden:
   - de winners moeten uitbetaald worden als ze gewonnen hebben. - akram(must)
   - bank gaat pas aan het eind kopen nadat alle spellen gespeeld zijn met de players - akram (must)
   - mooi printen van de handen (code in losse file) - John (must)
+  
+
+11 januari 13.08 akram:
+  - startegie randomrat gemaakt
+  - winner worden nu allemaal uitbetaald
+  - je kan de kaarten van de bank pas zien in de volgende ronde. Hier waren geen
+    wijzigingen nodig. 
+    
+  
 
 Als je klaar bent, geef status update in dit bestand.
