@@ -1,4 +1,6 @@
 source("userInputFunctions.R")
+source("printHand.R")
+
 
 Blackjack <- function(){
   
@@ -84,7 +86,7 @@ Blackjack <- function(){
     }
     
     repeat {
-      print(HANDS)
+      printHand(HANDS,"all")
       complete_data <<- merge(HANDS, PLAYER, sort = FALSE)
       players_alive <- complete_data$player[complete_data$virtual == FALSE & complete_data$score <= 21]
       bots_alive <<- complete_data$player[complete_data$virtual == TRUE & complete_data$score <= 21]
@@ -203,7 +205,7 @@ Blackjack <- function(){
 
   # create cards
   make_cards <- function(){
-    face <- c("Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2")
+    face <- c("Ace", "King", "Queen", "Jack", "Ten", "9", "8", "7", "6", "5", "4", "3", "2")
     suit <- c("\U2660", "\U2663", "\U2666", "\U2665")
     value <- c(11, 10, 10, 10, 10, 9, 8, 7, 6, 5, 4, 3, 2)
     
@@ -253,7 +255,7 @@ Blackjack <- function(){
       print("It's a draw, nobody wins")
     }
     
-    print(HANDS[,c(2,4)])
+    printHand(HANDS,c(2,4))
     
     repeat {
       continue <- tolower(readline("Would you like to continue?  "))
