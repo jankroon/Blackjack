@@ -255,7 +255,7 @@ Blackjack <- function(){
       print("It's a draw, nobody wins")
     }
     
-    printHand(HANDS,c(2,4))
+    printHand(HANDS,"all")
     
     repeat {
       continue <- tolower(readline("Would you like to continue?  "))
