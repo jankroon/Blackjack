@@ -4,7 +4,7 @@
 
 printHand <- function(hand,selection){
   
-  if (selection == "all"){
+  if (any(selection=="all")){
     selection = c(1:nrow(hand))
   }
   
